@@ -1,0 +1,192 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="container my-5">
+  <div class="row g-4">
+
+    <!-- LEFT: Summary -->
+    <div class="col-lg-7">
+      <div class="card shadow-sm p-4">
+        <h4 class="fw-bold mb-4">Summary</h4>
+
+        <!-- Save booking details -->
+        <form id="summaryForm" action="/listings/<%= listing._id %>/addtocart" method="POST">
+
+          <!-- Check-in -->
+          <div class="d-flex justify-content-between align-items-start border-bottom pb-3 mb-3">
+            <div class="date-wrapper">
+              <div class="text-uppercase small text-muted">Check-in</div>
+              <div id="checkinText" class="fw-medium"><%= bookingData.checkin || "Not selected" %></div>
+              <input type="date" id="checkinInput" name="checkin"
+                     value="<%= bookingData.checkin || '' %>" class="form-control mt-2 d-none">
+            </div>
+            <a href="#" class="text-danger fw-semibold small edit-link" data-target="checkin">Edit</a>
+          </div>
+
+          <!-- Checkout -->
+          <div class="d-flex justify-content-between align-items-start border-bottom pb-3 mb-3">
+            <div class="date-wrapper">
+              <div class="text-uppercase small text-muted">Checkout</div>
+              <div id="checkoutText" class="fw-medium"><%= bookingData.checkout || "Not selected" %></div>
+              <input type="date" id="checkoutInput" name="checkout"
+                     value="<%= bookingData.checkout || '' %>" class="form-control mt-2 d-none">
+            </div>
+            <a href="#" class="text-danger fw-semibold small edit-link" data-target="checkout">Edit</a>
+          </div>
+
+          <!-- Guests -->
+          <div class="d-flex justify-content-between align-items-start border-bottom pb-3">
+            <div>
+              <div class="text-uppercase small text-muted">Guests</div>
+              <div id="guestsText" class="fw-medium">
+                <%= bookingData.guests ? bookingData.guests + " guest(s)" : "Not selected" %>
+              </div>
+              <select id="guestsInput" name="guests" class="form-select mt-2 d-none">
+                <% for (let i = 1; i <= 5; i++) { %>
+                  <option value="<%= i %>" <%= +bookingData.guests===i ? "selected" : "" %>>
+                    <%= i %> guest(s)
+                  </option>
+                <% } %>
+              </select>
+            </div>
+            <a href="#" class="text-danger fw-semibold small edit-link" data-target="guests">Edit</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- RIGHT: Your Total -->
+    <div class="col-lg-5">
+      <div class="card shadow-sm p-4">
+        <h4 class="fw-bold mb-3">Your Total</h4>
+
+        <!-- Payment form -->
+        <form id="paymentForm" action="/listings/<%= listing._id %>/payment" method="POST">
+          <!-- Hidden inputs -->
+          <input type="hidden" name="checkin" value="<%= bookingData.checkin %>">
+          <input type="hidden" name="checkout" value="<%= bookingData.checkout %>">
+          <input type="hidden" name="guests" value="<%= bookingData.guests %>">
+          <input type="hidden" name="nights" value="<%= bookingData.nights %>">
+          <input type="hidden" name="totalPrice" value="<%= bookingData.totalPrice %>">
+          <input type="hidden" name="taxes" value="<%= bookingData.taxes %>">
+          <input type="hidden" name="finalTotal" value="<%= bookingData.finalTotal %>">
+
+          <!-- Display -->
+          <p class="mb-1">
+            ₹<%= bookingData.pricePerNight || listing.price %> × 
+            <span id="nightsCount"><%= bookingData.nights || 0 %></span> nights = 
+            ₹<span id="totalPrice"><%= bookingData.totalPrice || 0 %></span>
+          </p>
+          <p class="mb-1">Taxes (10%): ₹<span id="taxesValue"><%= bookingData.taxes || 0 %></span></p>
+          <hr>
+          <h5 class="fw-bold">Total: ₹<span id="finalTotal"><%= bookingData.finalTotal || 0 %></span></h5>
+
+          <!-- ✅ Proceed should actually submit -->
+          <button id="proceedBtn" class="btn btn-danger w-100 fw-bold mt-3" type="submit">
+            Proceed
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const pricePerNight = <%= bookingData.pricePerNight || listing.price %>;
+    const paymentForm = document.getElementById("paymentForm");
+
+    // --- ✅ Pre-fill values from server/session ---
+    const initialCheckin = "<%= bookingData.checkin || '' %>";
+    const initialCheckout = "<%= bookingData.checkout || '' %>";
+    const initialGuests = "<%= bookingData.guests || '' %>";
+
+    if (initialCheckin) document.getElementById("checkinInput").value = initialCheckin;
+    if (initialCheckout) document.getElementById("checkoutInput").value = initialCheckout;
+    if (initialGuests) document.getElementById("guestsInput").value = initialGuests;
+
+    function calculateNights(checkin, checkout) {
+      if (!checkin || !checkout) return 0;
+      const inDate = new Date(checkin);
+      const outDate = new Date(checkout);
+      return Math.max(0, Math.ceil((outDate - inDate) / (1000 * 60 * 60 * 24)));
+    }
+
+    function updateSummaryAndTotals() {
+      const checkin = document.getElementById("checkinInput").value;
+      const checkout = document.getElementById("checkoutInput").value;
+      const guests = document.getElementById("guestsInput").value;
+
+      document.getElementById("checkinText").textContent = checkin || "Not selected";
+      document.getElementById("checkoutText").textContent = checkout || "Not selected";
+      document.getElementById("guestsText").textContent = guests ? guests + " guest(s)" : "Not selected";
+
+      const nights = calculateNights(checkin, checkout);
+      const totalPrice = nights * pricePerNight;
+      const taxes = Math.round(totalPrice * 0.1);
+      const finalTotal = totalPrice + taxes;
+
+      document.getElementById("nightsCount").textContent = nights;
+      document.getElementById("totalPrice").textContent = totalPrice;
+      document.getElementById("taxesValue").textContent = taxes;
+      document.getElementById("finalTotal").textContent = finalTotal;
+
+      paymentForm.querySelector('input[name="checkin"]').value = checkin;
+      paymentForm.querySelector('input[name="checkout"]').value = checkout;
+      paymentForm.querySelector('input[name="guests"]').value = guests;
+      paymentForm.querySelector('input[name="nights"]').value = nights;
+      paymentForm.querySelector('input[name="totalPrice"]').value = totalPrice;
+      paymentForm.querySelector('input[name="taxes"]').value = taxes;
+      paymentForm.querySelector('input[name="finalTotal"]').value = finalTotal;
+    }
+
+    // Edit links
+    document.querySelectorAll(".edit-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const target = link.dataset.target;
+        document.getElementById(target + "Text").classList.add("d-none");
+        document.getElementById(target + "Input").classList.remove("d-none");
+        document.getElementById(target + "Input").focus();
+      });
+    });
+
+    // Setup date inputs
+    function setupDateInput(inputId, textId) {
+      const input = document.getElementById(inputId);
+      const text = document.getElementById(textId);
+
+      input.addEventListener("change", function () {
+        updateSummaryAndTotals();
+        if (input.value) {
+          input.classList.add("d-none");
+          text.classList.remove("d-none");
+        }
+      });
+
+      input.addEventListener("blur", function () {
+        updateSummaryAndTotals();
+        input.classList.add("d-none");
+        text.classList.remove("d-none");
+      });
+    }
+    setupDateInput("checkinInput", "checkinText");
+    setupDateInput("checkoutInput", "checkoutText");
+
+    // Guests input
+    const guestsInput = document.getElementById("guestsInput");
+    const guestsText = document.getElementById("guestsText");
+
+    guestsInput.addEventListener("change", function () {
+      updateSummaryAndTotals();
+      guestsInput.classList.add("d-none");
+      guestsText.classList.remove("d-none");
+    });
+
+    // --- ✅ Initial run with pre-filled values ---
+    updateSummaryAndTotals();
+  });
+</script>
+
+

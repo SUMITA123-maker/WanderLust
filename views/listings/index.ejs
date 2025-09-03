@@ -1,0 +1,162 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<style>
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between; /* Changed to spread filters and tax toggle */
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem; /* Added padding to match listings container */
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+}
+
+.filter {
+    text-align: center;
+    margin: 0;
+    opacity: 0.7;
+    padding: 0.3rem 0.6rem;
+    transition: all 0.2s ease-in-out;
+    border-bottom: 2px solid transparent;
+    flex-shrink: 0;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.filter.active {
+    opacity: 1;
+    border-bottom: 2px solid black;
+}
+
+.filter.active i {
+    color: black;
+}
+
+.tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    margin-left: auto;
+    margin-right: 1rem; /* Add this to shift it left */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.hidden {
+    display: none !important;
+}
+</style>
+
+<div class="row mt-3">
+    <!-- Filters -->
+    <div id="filters">
+        <div class="filter active" data-category="All">
+            <div><i class="fa-solid fa-layer-group"></i></div>
+            <p>All</p>
+        </div>
+        <div class="filter" data-category="Trending"><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></div>
+        <div class="filter" data-category="Rooms"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></div>
+        <div class="filter" data-category="Iconic Cities"><div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic Cities</p></div>
+        <div class="filter" data-category="Mountains"><div><i class="fa-solid fa-mountain"></i></div><p>Mountains</p></div>
+        <div class="filter" data-category="Castles"><div><i class="fa-brands fa-fort-awesome"></i></div><p>Castles</p></div>
+        <div class="filter" data-category="Amazing Pools"><div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing Pools</p></div>
+        <div class="filter" data-category="Campings"><div><i class="fa-solid fa-campground"></i></div><p>Campings</p></div>
+        <div class="filter" data-category="Farms"><div><i class="fa-solid fa-cow"></i></div><p>Farms</p></div>
+        <div class="filter" data-category="Arctic"><div><i class="fa-solid fa-snowman"></i></div><p>Arctic</p></div>
+        <div class="filter" data-category="Domes"><div><i class="fa-solid fa-igloo"></i></div><p>Domes</p></div>
+        <div class="filter" data-category="Boats"><div><i class="fa-solid fa-ship"></i></div><p>Boats</p></div>
+
+        <!-- Tax toggle -->
+        <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listings -->
+    <div id="listings" class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
+        <% allListings.forEach(listing => { %>
+            <div class="col listing-col" data-category="<%= listing.category %>">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card listing-card">
+                        <% if (listing.image && listing.image.length > 0) { %>
+                            <img src="<%= listing.image[0].url %>" 
+                                class="card-img-top" 
+                                alt="Listing Image" 
+                                style="height: 20rem; object-fit: cover;">
+                        <% } else { %>
+                            <img src="/images/default.jpg" 
+                                class="card-img-top" 
+                                alt="No image" 
+                                style="height: 20rem; object-fit: cover;">
+                        <% } %>
+
+                        <div class="card-body">
+                            <p class="card-text price-text" 
+                               data-price="<%= listing.price %>" 
+                               data-title="<%= listing.title %>">
+                                <b><%= listing.title %></b><br>
+                                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<script>
+    // Tax toggle
+    const taxSwitch = document.getElementById("switchCheckDefault");
+    const priceTexts = document.querySelectorAll(".price-text");
+
+    taxSwitch.addEventListener("change", () => {
+        priceTexts.forEach(el => {
+            const basePrice = parseFloat(el.getAttribute("data-price"));
+            const title = el.getAttribute("data-title");
+
+            if (taxSwitch.checked) {
+                const taxed = basePrice * 1.18;
+                el.innerHTML = `<b>${title}</b><br>&#8377; ${taxed.toLocaleString("en-IN")} / night <small>(incl. GST)</small>`;
+            } else {
+                el.innerHTML = `<b>${title}</b><br>&#8377; ${basePrice.toLocaleString("en-IN")} / night`;
+            }
+        });
+    });
+
+    // Category filter
+    const filters = document.querySelectorAll(".filter");
+    const listingCols = document.querySelectorAll(".listing-col");
+
+    filters.forEach(filter => {
+        filter.addEventListener("click", () => {
+            const category = filter.getAttribute("data-category");
+
+            filters.forEach(f => f.classList.remove("active"));
+            filter.classList.add("active");
+
+            listingCols.forEach(col => {
+                if (category === "All" || col.getAttribute("data-category") === category) {
+                    col.classList.remove("hidden");
+                } else {
+                    col.classList.add("hidden");
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,559 @@
+/* Simple CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar - Full Width Fix */
+.navbar {
+    height: 5rem;
+    background-color: #fff;
+    width: 100% !important;
+    position: sticky;
+    top: 0;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    border: none;
+    z-index: 1050;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure body and html don't have margins causing the issue */
+body, html {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+/* Reset any parent container constraints */
+.navbar-container,
+.wrapper,
+main {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.navbar .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+/* Add padding back to the content inside */
+.navbar-brand {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Fix navbar nav items vertical alignment */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Add padding to the last nav group */
+.navbar-nav.me-3 {
+    margin-right: 2rem !important;
+}
+
+/* Search form styling */
+.d-flex[role="search"] {
+    margin-right: 1rem;
+}
+
+/* Footer - Full Width, No Bottom Gap */
+footer {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    margin-bottom: 0;
+}
+
+/* Search Button Styles */
+/* Input */
+.search-inp {
+    border-radius: 25px;   /* fully rounded */
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #ddd;
+    box-shadow: none !important;
+    outline: none !important;
+    width: 250px; /* adjust size */
+    margin-right: 10px; /* add space between input and button */
+}
+
+/* Button */
+.search-btn {
+    background-color: #FF385C !important;
+    color: white !important;
+    border-radius: 25px;   /* fully rounded */
+    padding: 0.6rem 1.4rem;
+    border: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: none !important;
+}
+
+/* Button hover */
+.search-btn:hover {
+    background-color: #e03150 !important;
+    color: white !important;
+}
+
+
+/* Container Fix */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+
+/* Cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+ 
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card Effect */
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* New page */
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Edit page */
+
+.edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Show page */
+
+.show-img {
+    height: 30vb;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Map */
+#map {
+    height: 400px;
+    width: 90vh;
+    margin-bottom: 20px;
+}
+
+
+/* Review card styling */
+.review-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.05);
+}
+
+.review-card .card-body {
+    padding: 0.5rem 0 0 0.5rem !important;
+}
+
+/* Layout for the host + title row */
+.listing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* Host avatar */
+.host-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Main description spacing */
+.main-description {
+  margin-bottom: 1.5rem;
+}
+
+/* Subtle gray text for secondary info */
+.text-muted {
+  color: #6b6b6b;
+}
+
+/* Image gallery adjustments if needed */
+.listing-gallery img {
+  border-radius: 8px;
+}
+
+
+/* Highlights Section */
+.listing-highlights {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  gap: 12px;
+}
+
+.highlight-item i {
+  font-size: 20px;
+  color: #222;
+  flex-shrink: 0;
+}
+
+.highlight-item strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.highlight-item p {
+  margin: 3px 0 0;
+  font-size: 14px;
+  color: #717171;
+}
+
+/* Container */
+.listing-offers {
+  margin-top: 24px;
+  font-family: Arial, sans-serif;
+  color: #222;
+}
+
+/* Heading */
+.listing-offers h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Grid layout: two columns for larger screens */
+.offers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  gap: 14px 40px; /* row gap, column gap */
+}
+
+/* Each offer item */
+.offer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icons */
+.offer-item i {
+  font-size: 20px;
+  min-width: 20px;
+  color: #222;
+}
+
+/* Text */
+.offer-item span {
+  font-size: 16px;
+}
+
+/* Responsive: Switch to 1 column on small screens */
+@media (max-width: 600px) {
+  .offers-grid {
+    grid-template-columns: 1fr; /* 1 column on small screens */
+    gap: 12px;
+  }
+}
+
+/* Location */
+.text-muted {
+  font-size: 15px;
+  color: #717171; /* Airbnb grey */
+  margin-bottom: 6px;
+}
+
+/* Catchy description (tagline above host) */
+.listing-tagline {
+  font-size: 18px;
+  font-weight: 500;
+  color: #222222;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  max-width: 650px;
+}
+
+/* Airbnb-style main description (for About section later) */
+.main-description p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #484848;
+  margin: 16px 0;
+  max-width: 650px;
+}
+
+/* Hosted By */
+.text-muted.hosted-by {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222222;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/* Button container */
+.owner-controls {
+  display: flex;
+  gap: 18px; /* Increased gap for better spacing */
+  margin-top: 20px;
+}
+
+/* Edit button */
+.owner-controls .edit-btn {
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.owner-controls .edit-btn:hover {
+  /* Only shadow and slight lift, no color change */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Delete button */
+.owner-controls .delete-btn {
+  background-color: #484848;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.owner-controls .delete-btn:hover {
+  /* Only shadow and slight lift, no color change */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Small spacing adjustment for mobile */
+@media (max-width: 576px) {
+  .listing-tagline {
+    font-size: 16px;
+  }
+  .text-muted {
+    font-size: 14px;
+  }
+}
+
+/*Show page*/
+.about-listing {
+  max-height: 140px;  /* collapsed height */
+  overflow: hidden;
+  position: relative;
+  line-height: 1.6;
+  transition: max-height 0.4s ease;
+}
+
+/* Gradient fade at bottom */
+.about-listing::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to top, white, transparent);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Expanded state */
+.about-listing.expanded {
+  max-height: none;
+}
+.about-listing.expanded::after {
+  opacity: 0;
+}
+
+/* Button */
+.show-more-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #ff385c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+.show-more-btn:hover {
+  text-decoration: underline;
+}
+
+
+/* Make Edit + Delete buttons inline */
+.owner-controls .btn {
+  display: inline-block !important;
+  width: auto !important;
+}
+
+/* Make review Submit button shrink & center */
+.reviews-section form button {
+  display: inline-block !important;
+  width: auto !important;
+  margin: 10px auto;  /* centers the button */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
