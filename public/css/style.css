@@ -547,6 +547,150 @@ footer {
 
 
 
+/* ✅ RESPONSIVE FIXES */
+
+/* Navbar & Search (stack vertically on mobile) */
+@media (max-width: 768px) {
+  .navbar-brand {
+    margin-left: 1rem;
+  }
+
+  .d-flex[role="search"] {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .search-inp {
+    width: 100% !important;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .search-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Categories row - make horizontally scrollable */
+@media (max-width: 768px) {
+  .categories {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    scrollbar-width: thin; /* Firefox */
+  }
+  .categories::-webkit-scrollbar {
+    height: 6px;
+  }
+  .categories::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  .categories > div {
+    flex: 0 0 auto;
+    text-align: center;
+    min-width: 70px;
+  }
+}
+
+/* Cards - adjust margin & padding */
+@media (max-width: 768px) {
+  .listing-card {
+    margin: 1rem 0;
+  }
+  .card-body {
+    padding: 0.5rem !important;
+  }
+}
+
+/* Map responsiveness */
+@media (max-width: 768px) {
+  #map {
+    width: 100% !important;
+    height: 250px !important;
+  }
+}
+
+/* Text scaling */
+@media (max-width: 576px) {
+  .listing-tagline {
+    font-size: 15px;
+  }
+  .text-muted {
+    font-size: 13px;
+  }
+  .highlight-item strong {
+    font-size: 14px;
+  }
+  .highlight-item p {
+    font-size: 13px;
+  }
+}
+
+/* Footer responsiveness */
+@media (max-width: 768px) {
+  .f-info {
+    flex-direction: column;
+    height: auto;
+    gap: 0.5rem;
+    padding: 1.5rem;
+  }
+  .f-info-socials {
+    margin-top: 0.5rem;
+  }
+}
+
+
+/* Fullscreen modal overlay */
+.booking-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto; /* allow scroll on small screens */
+  padding: 1rem;
+}
+
+/* Modal box */
+.booking-modal .modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Close button */
+.close-modal {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .booking-modal .modal-content {
+    width: 95%;
+    margin: auto;
+  }
+}
+
+
+
 
 
 
