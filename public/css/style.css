@@ -1,0 +1,858 @@
+/* Simple CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* Make all images scale within containers */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar - Full Width Fix */
+.navbar {
+    height: 5rem;
+    background-color: #fff;
+    width: 100% !important;
+    position: sticky;
+    top: 0;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    border: none;
+    z-index: 1050;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure body and html don't have margins causing the issue */
+body, html {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+/* Reset any parent container constraints */
+.navbar-container,
+.wrapper,
+main {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.navbar .container-fluid {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+/* Add padding back to the content inside */
+.navbar-brand {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile inline navbar spacing */
+.mobile-inline-nav {
+  padding: 8px 0;
+}
+
+/* Make logo and hamburger have equal side spacing; center search between */
+@media (max-width: 767px) {
+  .mobile-inline-nav {
+    gap: 0;
+    padding: 8px 16px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .mobile-inline-nav .navbar-brand {
+    margin: 0 !important;
+    flex: 0 0 auto;
+  }
+  
+  .mobile-inline-nav form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 16px;
+  }
+  
+  .mobile-inline-nav .navbar-toggler {
+    margin: 0 !important;
+    flex: 0 0 auto;
+  }
+  
+  .mobile-inline-nav .mobile-search {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Fix navbar nav items vertical alignment */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Add padding to the last nav group */
+.navbar-nav.me-3 {
+    margin-right: 2rem !important;
+}
+
+/* Ensure center search stays centered */
+.desktop-search {
+    max-width: 520px;
+}
+
+/* Search form styling */
+.d-flex[role="search"] {
+    margin-right: 1rem;
+}
+
+/* New pill-shaped search styling */
+.desktop-search-container {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    max-width: 400px;
+}
+
+.pill-search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s ease;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.pill-search-form:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.pill-search-input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    font-size: 14px;
+    color: #222;
+    padding: 8px 16px;
+    flex: 1;
+    min-width: 0;
+}
+
+.pill-search-input::placeholder {
+    color: #717171;
+}
+
+.pill-search-btn {
+    background-color: #FF385C !important;
+    color: white !important;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.pill-search-btn:hover {
+    background-color: #e03150 !important;
+}
+
+/* Footer - Full Width, No Bottom Gap */
+footer {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    margin-bottom: 0;
+}
+
+/* Center search with separate input and button */
+.search-input-pill {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+}
+.search-input-pill.small {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.search-inp {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    width: 280px;
+    font-size: 0.95rem;
+    background: transparent;
+}
+.search-input-pill.small .search-inp {
+    width: 120px;
+    font-size: 0.85rem;
+}
+.mobile-center-search {
+    margin: 8px auto 0 auto;
+}
+
+.search-btn {
+    background-color: #FF385C !important;
+    color: white !important;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: none !important;
+}
+
+.search-btn:hover {
+    background-color: #e03150 !important;
+}
+
+
+/* Container Fix */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+
+/* Cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+ 
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card Effect */
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* New page */
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Edit page */
+
+.edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* Show page */
+
+.show-img {
+    height: 30vb;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Map */
+#map {
+    height: 400px;
+    width: 100% !important; /* ensure full width on smaller screens */
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+
+/* Review card styling */
+.review-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.05);
+}
+
+.review-card .card-body {
+    padding: 0.5rem 0 0 0.5rem !important;
+}
+
+/* Layout for the host + title row */
+.listing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* Host avatar */
+.host-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Main description spacing */
+.main-description {
+  margin-bottom: 1.5rem;
+}
+
+/* Subtle gray text for secondary info */
+.text-muted {
+  color: #6b6b6b;
+}
+
+/* Image gallery adjustments if needed */
+.listing-gallery img {
+  border-radius: 8px;
+}
+
+
+/* Highlights Section */
+.listing-highlights {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  gap: 12px;
+}
+
+.highlight-item i {
+  font-size: 20px;
+  color: #222;
+  flex-shrink: 0;
+}
+
+.highlight-item strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.highlight-item p {
+  margin: 3px 0 0;
+  font-size: 14px;
+  color: #717171;
+}
+
+/* Container */
+.listing-offers {
+  margin-top: 24px;
+  font-family: Arial, sans-serif;
+  color: #222;
+}
+
+/* Heading */
+.listing-offers h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Grid layout: two columns for larger screens */
+.offers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  gap: 14px 40px; /* row gap, column gap */
+}
+
+/* Each offer item */
+.offer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icons */
+.offer-item i {
+  font-size: 20px;
+  min-width: 20px;
+  color: #222;
+}
+
+/* Text */
+.offer-item span {
+  font-size: 16px;
+}
+
+/* Responsive: Switch to 1 column on small screens */
+@media (max-width: 600px) {
+  .offers-grid {
+    grid-template-columns: 1fr; /* 1 column on small screens */
+    gap: 12px;
+  }
+}
+
+/* Location */
+.text-muted {
+  font-size: 15px;
+  color: #717171; /* Airbnb grey */
+  margin-bottom: 6px;
+}
+
+/* Catchy description (tagline above host) */
+.listing-tagline {
+  font-size: 18px;
+  font-weight: 500;
+  color: #222222;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  max-width: 650px;
+}
+
+/* Airbnb-style main description (for About section later) */
+.main-description p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #484848;
+  margin: 16px 0;
+  max-width: 650px;
+}
+
+/* Hosted By */
+.text-muted.hosted-by {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222222;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/* Button container */
+.owner-controls {
+  display: flex;
+  gap: 18px; /* Increased gap for better spacing */
+  margin-top: 20px;
+}
+
+/* Edit button */
+.owner-controls .edit-btn {
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.owner-controls .edit-btn:hover {
+  /* Only shadow and slight lift, no color change */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Delete button */
+.owner-controls .delete-btn {
+  background-color: #484848;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.owner-controls .delete-btn:hover {
+  /* Only shadow and slight lift, no color change */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Small spacing adjustment for mobile */
+@media (max-width: 576px) {
+  .listing-tagline {
+    font-size: 16px;
+  }
+  .text-muted {
+    font-size: 14px;
+  }
+}
+
+/*Show page*/
+.about-listing {
+  max-height: 140px;  /* collapsed height */
+  overflow: hidden;
+  position: relative;
+  line-height: 1.6;
+  transition: max-height 0.4s ease;
+}
+
+/* Gradient fade at bottom */
+.about-listing::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to top, white, transparent);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Expanded state */
+.about-listing.expanded {
+  max-height: none;
+}
+.about-listing.expanded::after {
+  opacity: 0;
+}
+
+/* Button */
+.show-more-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #ff385c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+.show-more-btn:hover {
+  text-decoration: underline;
+}
+
+
+/* Make Edit + Delete buttons inline */
+.owner-controls .btn {
+  display: inline-block !important;
+  width: auto !important;
+}
+
+/* Make review Submit button shrink & center */
+.reviews-section form button {
+  display: inline-block !important;
+  width: auto !important;
+  margin: 10px auto;  /* centers the button */
+}
+
+
+
+/* ===== MOBILE-ONLY RESPONSIVE FIXES ===== */
+@media (max-width: 767px) {
+  /* Reduce card image height for mobile grid */
+  .card-img-top {
+    height: 14rem !important;
+  }
+
+  /* Footer spacing on small screens */
+  .f-info {
+    height: auto;
+    padding: 1rem 0.5rem;
+  }
+
+  /* Map smaller height on phones */
+  #map {
+    height: 240px;
+  }
+  
+  
+  /* Hide DESKTOP search on mobile; keep the compact mobile search visible */
+  .desktop-search {
+    display: none !important;
+  }
+
+  /* Mobile hamburger button */
+  .navbar-toggler {
+    border: none !important;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 1.25rem !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+  .navbar-toggler.d-md-none {
+    margin-right: 12px;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none !important;
+  }
+
+  .navbar-toggler i {
+    color: #222 !important;
+  }
+
+  /* Mobile navigation overlay */
+  .mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    z-index: 9999;
+    padding: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .mobile-nav-overlay.show {
+    transform: translateX(0);
+  }
+
+  /* Mobile menu close button */
+  .mobile-menu-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 10000;
+  }
+
+  /* Mobile menu list */
+  .mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 3rem 0 0 0;
+  }
+
+  .mobile-nav-list li {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .mobile-nav-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    color: #222;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .mobile-nav-list a:hover {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 0 -0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .mobile-nav-list i {
+    font-size: 1.2rem;
+    color: #666;
+  }
+}
+
+/* Desktop styles - preserve original */
+@media (min-width: 768px) {
+  /* Keep desktop navbar as original */
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+  
+  
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  /* Ensure desktop search stays visible and centered */
+  .d-flex[role="search"] {
+    display: flex !important;
+  }
+}
+
+/* Force one listing per row on small/medium screens */
+@media (max-width: 991px) {
+  #listings .listing-col {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Center listings grid container */
+/* Make listings grid centered within container */
+#listings {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px 20px;
+  justify-content: center;
+}
+
+/* Ensure grid is centered even when fewer items */
+.container #listings {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Add comfortable page padding for images/cards */
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+#listings .listing-col {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.listing-card {
+  margin: 0.5rem 0.25rem 1.25rem 0.25rem !important;
+}
+
+.card-img-top {
+  border-radius: 12px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,304 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<style>
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between; /* Changed to spread filters and tax toggle */
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem; /* Added padding to match listings container */
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+}
+
+.filter {
+    text-align: center;
+    margin: 0;
+    opacity: 0.7;
+    padding: 0.3rem 0.6rem;
+    transition: all 0.2s ease-in-out;
+    border-bottom: 2px solid transparent;
+    flex-shrink: 0;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.filter.active {
+    opacity: 1;
+    border-bottom: 2px solid black;
+}
+
+.filter.active i {
+    color: black;
+}
+
+.tax-toggle {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    height: 48px;
+    padding: 8px 16px;
+    margin-left: auto;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    font-size: 14px;
+    color: #222;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ✅ All screen sizes: make filters scrollable row */
+@media (max-width: 1399px) {
+  #filters {
+    flex-wrap: nowrap;            /* no wrapping */
+    overflow-x: auto;             /* horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+    justify-content: flex-start;  /* align left */
+    gap: 1.5rem;
+    padding: 0.5rem 1rem;
+    padding-right: 2rem; /* extra padding to ensure toggle is fully visible */
+  }
+
+  .filter {
+    flex: 0 0 auto; /* prevent shrinking */
+    min-width: 70px;
+    white-space: nowrap;
+  }
+
+  .tax-toggle {
+    flex: 0 0 auto; /* keep toggle visible */
+    margin-left: 1.5rem; /* consistent with filter gap */
+    min-width: 200px; /* ensure toggle has enough space */
+  }
+
+  /* optional: hide scrollbar for a cleaner Airbnb look */
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+  #filters {
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* Large Desktop: normal flex layout with wrapping */
+@media (min-width: 1400px) {
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .filter {
+    flex: 0 0 auto;
+    min-width: auto;
+  }
+  
+  .tax-toggle {
+    margin-left: auto;
+    margin-right: 1rem;
+    min-width: auto;
+  }
+}
+
+/* Custom grid layout for listings */
+@media (max-width: 499px) {
+  #listings {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  
+  #listings .col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 799px) {
+  #listings {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem;
+  }
+  
+  #listings .col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 999px) {
+  #listings {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem;
+  }
+  
+  #listings .col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+}
+
+@media (min-width: 1000px) {
+  #listings {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.5rem;
+  }
+  
+  #listings .col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+}
+
+/* Ensure cards look good in grid */
+.listing-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.listing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.listing-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.listing-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+</style>
+
+<div class="row mt-3">
+    <!-- Filters -->
+    <div id="filters">
+        <div class="filter active" data-category="All">
+            <div><i class="fa-solid fa-layer-group"></i></div>
+            <p>All</p>
+        </div>
+        <div class="filter" data-category="Trending"><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></div>
+        <div class="filter" data-category="Rooms"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></div>
+        <div class="filter" data-category="Iconic Cities"><div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic Cities</p></div>
+        <div class="filter" data-category="Mountains"><div><i class="fa-solid fa-mountain"></i></div><p>Mountains</p></div>
+        <div class="filter" data-category="Castles"><div><i class="fa-brands fa-fort-awesome"></i></div><p>Castles</p></div>
+        <div class="filter" data-category="Amazing Pools"><div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing Pools</p></div>
+        <div class="filter" data-category="Campings"><div><i class="fa-solid fa-campground"></i></div><p>Campings</p></div>
+        <div class="filter" data-category="Farms"><div><i class="fa-solid fa-cow"></i></div><p>Farms</p></div>
+        <div class="filter" data-category="Arctic"><div><i class="fa-solid fa-snowman"></i></div><p>Arctic</p></div>
+        <div class="filter" data-category="Domes"><div><i class="fa-solid fa-igloo"></i></div><p>Domes</p></div>
+        <div class="filter" data-category="Boats"><div><i class="fa-solid fa-ship"></i></div><p>Boats</p></div>
+
+        <!-- Tax toggle -->
+        <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listings -->
+    <div id="listings" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mt-3">
+        <% allListings.forEach(listing => { %>
+            <div class="col listing-col" data-category="<%= listing.category %>">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card listing-card">
+                        <% if (listing.image && listing.image.length > 0) { %>
+                            <img src="<%= listing.image[0].url %>" 
+                                class="card-img-top" 
+                                alt="Listing Image" 
+                                style="height: 20rem; object-fit: cover;">
+                        <% } else { %>
+                            <img src="/images/default.jpg" 
+                                class="card-img-top" 
+                                alt="No image" 
+                                style="height: 20rem; object-fit: cover;">
+                        <% } %>
+
+                        <div class="card-body">
+                            <p class="card-text price-text" 
+                               data-price="<%= listing.price %>" 
+                               data-title="<%= listing.title %>">
+                                <b><%= listing.title %></b><br>
+                                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<script>
+    // Tax toggle
+    const taxSwitch = document.getElementById("switchCheckDefault");
+    const priceTexts = document.querySelectorAll(".price-text");
+
+    taxSwitch.addEventListener("change", () => {
+        priceTexts.forEach(el => {
+            const basePrice = parseFloat(el.getAttribute("data-price"));
+            const title = el.getAttribute("data-title");
+
+            if (taxSwitch.checked) {
+                const taxed = basePrice * 1.18;
+                el.innerHTML = `<b>${title}</b><br>&#8377; ${taxed.toLocaleString("en-IN")} / night <small>(incl. GST)</small>`;
+            } else {
+                el.innerHTML = `<b>${title}</b><br>&#8377; ${basePrice.toLocaleString("en-IN")} / night`;
+            }
+        });
+    });
+
+    // Category filter
+    const filters = document.querySelectorAll(".filter");
+    const listingCols = document.querySelectorAll(".listing-col");
+
+    filters.forEach(filter => {
+        filter.addEventListener("click", () => {
+            const category = filter.getAttribute("data-category");
+
+            filters.forEach(f => f.classList.remove("active"));
+            filter.classList.add("active");
+
+            listingCols.forEach(col => {
+                if (category === "All" || col.getAttribute("data-category") === category) {
+                    col.classList.remove("hidden");
+                } else {
+                    col.classList.add("hidden");
+                }
+            });
+        });
+    });
+</script>
+

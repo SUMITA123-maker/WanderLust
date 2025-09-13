@@ -1,0 +1,99 @@
+<nav class="navbar navbar-expand-md navbar-light sticky-top">
+  <div class="container-fluid">
+
+    <!-- Mobile inline row: logo | search | hamburger -->
+    <div class="d-flex d-md-none align-items-center gap-2 w-100 mobile-inline-nav">
+      <a class="navbar-brand m-0" href="/listings">
+        <i class="fa-regular fa-compass" style="color: #FF385C; font-size: 1.8rem;"></i>
+      </a>
+      <div class="flex-grow-0" role="search">
+        <div class="search-input-pill small mobile-search">
+          <input class="search-inp" type="search" name="q" placeholder="Search" aria-label="Search">
+          <button class="search-btn" type="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+      <button class="navbar-toggler ms-auto" type="button">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Desktop navigation -->
+    <div class="collapse navbar-collapse d-none d-md-flex align-items-center justify-content-between w-100">
+      <!-- Left side: Logo + Explore -->
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand me-4" href="/listings">
+          <i class="fa-regular fa-compass" style="color: #FF385C; font-size: 2rem;"></i>
+        </a>
+        <a class="nav-link text-decoration-none" href="/listings" style="color: #222;">Explore</a>
+      </div>
+      
+      <!-- Center: Search form -->
+      <div class="desktop-search-container">
+        <div class="pill-search-form">
+          <input class="pill-search-input" type="search" name="q" placeholder="Search destinations" aria-label="Search">
+          <button class="pill-search-btn" type="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span class="d-none d-lg-inline ms-1">Search</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Right side navigation -->
+      <div class="d-flex align-items-center">
+        <a class="nav-link text-decoration-none me-3" href="/listings/new" style="color: #222;">Airbnb your home</a>
+        <% if (currUser) { %>
+          <a class="nav-link text-decoration-none" href="/logout" style="color: #222;">Logout</a>
+        <% } else { %>
+          <a class="nav-link text-decoration-none me-3" href="/login" style="color: #222;">Login</a>
+          <a class="nav-link text-decoration-none" href="/signup" style="color: #222;">Sign Up</a>
+        <% } %>
+      </div>
+    </div>
+    
+    <!-- Quick search on mobile -->
+    
+
+    <!-- Mobile navigation menu (hidden by default) -->
+    <div class="mobile-nav-overlay d-md-none">
+      <!-- Mobile close button -->
+      <button class="mobile-menu-close">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="/listings">
+            Explore <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/listings/new">
+            Airbnb your home <i class="fa-solid fa-plus"></i>
+          </a>
+        </li>
+        
+        <% if (currUser) { %>
+          <li>
+            <a href="/logout">
+              Logout (<%= currUser.username %>) <i class="fa-solid fa-sign-out-alt"></i>
+            </a>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="/login">
+              Login <i class="fa-solid fa-user"></i>
+            </a>
+          </li>
+          <li>
+            <a href="/signup">
+              Sign Up <i class="fa-solid fa-user-plus"></i>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+    
+  </div>
+</nav>

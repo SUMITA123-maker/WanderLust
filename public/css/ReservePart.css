@@ -1,0 +1,293 @@
+/* showing price */
+
+/* Sidebar (sticky on desktop) */
+.booking-sidebar {
+  width: 100%;
+  max-width: 360px;
+  position: sticky;
+  top: 90px;
+}
+
+/* Price card */
+.price-reserve-box {
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 24px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  margin-top: 20px;
+  text-align: center;
+}
+
+.price-reserve-box h4 {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.price-reserve-box h4 .per {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b6b6b;
+}
+
+/* Two-col layout */
+.details-two-col {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  align-items: start;
+  gap: 32px;
+  margin-top: 1.25rem;
+}
+
+/* Booking form container */
+.booking-form {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 10px !important;
+  background: #fff;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Form rows */
+.form-row {
+  margin: 0 0 14px 0;
+  border: 0 !important;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Field block */
+.form-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: left;
+}
+
+/* Labels */
+.form-field label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #717171;
+  margin: 0 0 6px 0;
+  text-align: left;
+}
+
+/* Inputs & selects */
+.form-control,
+.form-field input[type="date"] {
+  width: 100%;
+  height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  background: #fff;
+  color: #222;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .15s, box-shadow .15s;
+  text-align: left;
+}
+
+.form-control:focus,
+.form-field input[type="date"]:focus {
+  border-color: #ff385c;
+  box-shadow: 0 0 0 3px rgba(255,56,92,.18);
+}
+
+/* Remove browser glow */
+input:invalid, select:invalid {
+  box-shadow: none;
+}
+
+/* ---- Date inputs FIX ---- */
+.form-field input[type="date"] {
+  padding: 12px 14px 12px 44px; /* space for icon */
+  color: transparent; /* hide default date text */
+  position: relative;
+}
+
+/* Placeholder text */
+.form-field input[type="date"]::before {
+  content: "Add date";
+  color: #717171;
+  position: absolute;
+  left: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 14px;
+}
+
+.form-field input[type="date"]:focus::before,
+.form-field input[type="date"]:valid::before {
+  content: "";
+}
+
+.form-field input[type="date"]:valid {
+  color: #222;
+}
+
+/* Calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  margin: 0;
+  padding: 0;
+}
+input[type="date"]::-moz-calendar-picker-indicator {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* Guests select with arrow */
+.guests-dropdown {
+  position: relative;
+}
+.guests-dropdown select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 38px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5'/></svg>") no-repeat right 12px center / 16px;
+  cursor: pointer;
+}
+
+/* Invalid feedback text */
+.invalid-feedback {
+  display: none;
+  font-size: 13px;
+  margin-top: 6px;
+  color: #ff385c;
+}
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated input[type="date"]:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+/* Custom invalid styling for dates */
+/* Error state for select and date inputs */
+.was-validated .form-control:invalid,
+.was-validated input[type="date"]:invalid {
+  border-color: #ff385c;
+  box-shadow: 0 0 0 1px #ff385c;
+  padding-right: 38px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ff385c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='7' x2='12' y2='13'/><line x1='12' y1='17' x2='12.01' y2='17'/></svg>")
+              no-repeat right 12px center / 16px;
+}
+
+/* Reserve button */
+.reserve-btn {
+  width: 100%;
+  min-width: 180px;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 32px;
+  margin: 10px 0 4px;
+  background: #e91e63;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: background .15s;
+}
+.reserve-btn:hover {
+  background: #d81b60;
+}
+.no-charge-text {
+  font-size: 14px;
+  color: #717171;
+  margin: 6px 0 0;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Booking row alignment */
+.booking-form .form-row.booking-dates {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1.3fr !important;
+  gap: 14px !important;
+  justify-content: start !important;
+  align-items: start !important;
+  text-align: left !important;
+}
+.booking-form .form-field,
+.booking-form .form-field input,
+.booking-form .form-field select {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+/* ====== MOBILE/TABLET (≤991px) ====== */
+@media (max-width: 991px) {
+  .price-reserve-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-top: 1px solid #e6e6e6;
+    box-shadow: 0 -4px 12px rgba(0,0,0,.08);
+    border-radius: 0;
+    margin: 0;
+    text-align: left;
+  }
+  .price-reserve-box h4 {
+    margin: 0;
+    font-size: 18px;
+  }
+  .price-reserve-box .reserve-btn {
+    margin: 0;
+  }
+  /* Hide only the DESKTOP sidebar form on small screens, not the modal's form */
+  .booking-sidebar .booking-form,
+  .price-reserve-box .no-charge-text {
+    display: none;
+  }
+  body {
+    padding-bottom: 80px;
+  }
+  .booking-sidebar {
+    position: static;
+    max-width: none;
+  }
+}
+
+/* ====== Grid wrapper ====== */
+@media (min-width: 992px) {
+  .details-two-col {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    align-items: start;
+    gap: 32px;
+  }
+}

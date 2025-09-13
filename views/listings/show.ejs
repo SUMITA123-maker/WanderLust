@@ -1,0 +1,562 @@
+<style>
+  /* ✅ Default input style */
+.form-control {
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ✅ Date input styling */
+input[type="date"] {
+  padding: 12px 60px 12px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Additional date input fixes */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+}
+
+/* Mobile modal specific date input styling */
+.booking-modal input[type="date"] {
+  padding: 12px 50px 12px 12px !important;
+  position: relative;
+  text-indent: 0;
+  direction: ltr;
+}
+
+.booking-modal input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+  margin-left: auto;
+}
+
+.booking-modal input[type="date"]::-webkit-datetime-edit {
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.booking-modal input[type="date"]::-webkit-datetime-edit-text {
+  padding: 0;
+}
+
+.booking-modal input[type="date"]::-webkit-datetime-edit-month-field,
+.booking-modal input[type="date"]::-webkit-datetime-edit-day-field,
+.booking-modal input[type="date"]::-webkit-datetime-edit-year-field {
+  padding: 0 2px;
+}
+
+/* Ensure booking modal is hidden by default on all sizes */
+.booking-modal {
+  display: none;
+}
+
+/* ✅ Success state */
+.form-control.is-valid {
+  border-color: #00a650;  /* Airbnb green */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300a650' viewBox='0 0 16 16'%3E%3Cpath d='M13.485 1.929a1.5 1.5 0 012.122 2.122l-8.5 8.5a1.5 1.5 0 01-2.122 0l-4-4a1.5 1.5 0 112.122-2.122L6.5 9.378l7.0-7.449z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+}
+
+/* ✅ Error state */
+.form-control.is-invalid {
+  border-color: #ff385c;  /* Airbnb red */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ff385c' viewBox='0 0 16 16'%3E%3Cpath d='M7.001 1.566a1.5 1.5 0 012.0 0l6.364 6.364a1.5 1.5 0 010 2.122l-6.364 6.364a1.5 1.5 0 01-2.122 0L.637 10.052a1.5 1.0 010-2.122L7.001 1.566zM8 5c-.552 0-1 .448-1 1v3c0 .552.448 1 1 1s1-.448 1-1V6c0-.552-.448-1-1-1zm0 6a1.25 1.25 0 100 2.5A1.25 1.25 0 008 11z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+}
+
+/* ✅ Feedback messages */
+.valid-feedback,
+.invalid-feedback {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.valid-feedback {
+  color: #00a650;
+}
+
+.invalid-feedback {
+  color: #ff385c;
+}
+
+/* ===== SMALL SCREENS (< 1200px) BOOKING ===== */
+@media (max-width: 1199px) {
+  
+  /* Mobile booking bar */
+  .mobile-booking-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: white !important;
+    padding: 10px 12px !important;
+    border-top: 1px solid #ddd !important;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .mobile-booking-bar .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #222;
+  }
+
+  .mobile-booking-bar .price .per {
+    font-weight: 400;
+    font-size: 13px;
+    color: #717171;
+  }
+
+  .mobile-booking-bar .reserve-btn {
+    background: #ff385c !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 14px !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    min-width: 110px !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Modal - centered card on mobile for reliability */
+  .booking-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important; /* dynamic viewport */
+    background: rgba(0, 0, 0, 0.8) !important;
+    z-index: 100000 !important;
+    display: none !important;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom)) 12px !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important; /* allow scroll if needed */
+  }
+
+  .booking-modal.active {
+    display: flex !important;
+    align-items: center !important; /* center vertically on phones */
+    justify-content: center !important;
+  }
+
+  .booking-modal .modal-content {
+    background: #fff !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    margin: 20px auto !important;
+    max-width: 520px !important;
+    width: 92% !important;
+    max-height: 90dvh !important;
+    overflow-y: auto !important;
+    position: relative !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.25) !important;
+    display: block !important;
+  }
+
+  .booking-modal .close-modal {
+    position: absolute !important;
+    top: max(10px, env(safe-area-inset-top)) !important;
+    right: 12px !important;
+    background: none !important;
+    border: none !important;
+    font-size: 26px !important;
+    cursor: pointer !important;
+    color: #666 !important;
+    padding: 6px !important;
+    line-height: 1 !important;
+  }
+
+  .booking-modal h3 {
+    margin: 0 0 20px 0 !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #222 !important;
+    text-align: center !important;
+  }
+
+  .booking-modal .form-field {
+    margin-bottom: 15px !important;
+  }
+
+  .booking-modal .form-field label {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-bottom: 5px !important;
+    color: #555 !important;
+  }
+
+  .booking-modal .form-field input,
+  .booking-modal .form-field select {
+    width: 100% !important;
+    padding: 12px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .booking-modal .reserve-btn {
+    width: 100% !important;
+    background: #ff385c !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    margin-top: 10px !important;
+    cursor: pointer !important;
+  }
+
+  /* Hide desktop sidebar on < desktop */
+  .booking-sidebar {
+    display: none !important;
+  }
+
+  /* Body padding for mobile bar */
+  body {
+    padding-bottom: 80px !important;
+  }
+
+  body.modal-open {
+    overflow: hidden !important;
+  }
+}
+
+/* Hide only mobile booking bar on large desktop screens */
+@media (min-width: 1200px) {
+  .mobile-booking-bar {
+    display: none !important;
+  }
+  
+  /* Remove body padding on desktop since no mobile bar */
+  body {
+    padding-bottom: 0 !important;
+  }
+}
+</style>
+
+<% layout("/layouts/boilerplate.ejs") %>
+
+<script>
+  const mapToken = "<%= process.env.MAP_TOKEN %>";
+  const listing = <%- JSON.stringify(listing) %>;
+</script>
+
+<div class="row mt-3">
+
+  <div class="details-two-col">
+    <div class="detail-main">
+      <div class="listing-header">
+        <h1><%= listing.title %></h1>
+      </div>
+
+      <% if (listing.image && listing.image.length > 0) { %>
+        <% const imageCount = listing.image.length; %>
+        
+        <% if (imageCount === 1) { %>
+          <div class="airbnb-gallery gallery-single">
+            <img src="<%= listing.image[0].url %>" alt="<%= listing.title %>" loading="lazy">
+          </div>
+        
+        <% } else if (imageCount === 2) { %>
+          <div class="airbnb-gallery gallery-two">
+            <% listing.image.forEach((img, index) => { %>
+              <img src="<%= img.url %>" alt="<%= listing.title %> - Image <%= index + 1 %>" loading="lazy">
+            <% }) %>
+          </div>
+        
+        <% } else if (imageCount === 3) { %>
+          <div class="airbnb-gallery gallery-three">
+            <img class="main-image" src="<%= listing.image[0].url %>" alt="<%= listing.title %> - Main" loading="lazy">
+            <% listing.image.slice(1, 3).forEach((img, index) => { %>
+              <img src="<%= img.url %>" alt="<%= listing.title %> - Image <%= index + 2 %>" loading="lazy">
+            <% }) %>
+          </div>
+        
+        <% } else if (imageCount === 4) { %>
+          <div class="airbnb-gallery gallery-four">
+            <img class="main-image" src="<%= listing.image[0].url %>" alt="<%= listing.title %> - Main" loading="lazy">
+            <% listing.image.slice(1, 4).forEach((img, index) => { %>
+              <img src="<%= img.url %>" alt="<%= listing.title %> - Image <%= index + 2 %>" loading="lazy">
+            <% }) %>
+          </div>
+        
+        <% } else if (imageCount === 5) { %>
+          <div class="airbnb-gallery gallery-five">
+            <img class="main-image" src="<%= listing.image[0].url %>" alt="<%= listing.title %> - Main" loading="lazy">
+            <% listing.image.slice(1, 5).forEach((img, index) => { %>
+              <img src="<%= img.url %>" alt="<%= listing.title %> - Image <%= index + 2 %>" loading="lazy">
+            <% }) %>
+          </div>
+        <% } %>
+
+      <% } else { %>
+        <div class="gallery-error">
+          <p>📷 No images available for this listing</p>
+        </div>
+      <% } %>
+
+      <hr>
+
+      <% if (listing.location || listing.country) { %>
+        <p class="text-muted">
+          <%= listing.location ? listing.location : '' %><%= (listing.location && listing.country) ? ', ' : '' %><%= listing.country ? listing.country : '' %>
+        </p>
+      <% } %>
+
+      <% if (listing.description) { %>
+        <div class="listing-tagline">
+          <%= listing.description %>
+        </div>
+      <% } %>
+
+      <% if (listing.owner && listing.owner.username) { %>
+        <p class="text-muted">Hosted by <%= listing.owner.username %></p>
+      <% } %>
+
+      <div class="listing-highlights">
+        <div class="highlight-item">
+          <i class="fa-solid fa-fan"></i>
+          <div>
+            <strong>Designed for staying cool</strong>
+            <p>Beat the heat with the A/C, portable fan and ceiling fan.</p>
+          </div>
+        </div>
+        
+        <div class="highlight-item">
+          <i class="fa-solid fa-door-open"></i>
+          <div>
+            <strong>Self check-in</strong>
+            <p>You can check in with the building staff.</p>
+          </div>
+        </div>
+        
+        <div class="highlight-item">
+          <i class="fa-solid fa-calendar-check"></i>
+          <div>
+            <strong>Free cancellation</strong>
+            <p>Get a full refund if you change your mind.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="about-section">
+        <div class="about-listing" id="about-listing">
+          <%= listing.about %>
+        </div>
+        <button id="toggle-about" class="show-more-btn">Show more</button>
+      </div>
+
+      <hr>
+
+      <div class="listing-offers">
+        <h3>What this place offers</h3>
+        <div class="offers-grid">
+          <div class="offer-item"><i class="fa-solid fa-wifi"></i><span>Wifi</span></div>
+          <div class="offer-item"><i class="fa-solid fa-square-parking"></i><span>Free parking on premises</span></div>
+          <div class="offer-item"><i class="fa-solid fa-broom"></i><span>Cleanliness</span></div>
+          <div class="offer-item"><i class="fa-solid fa-toilet"></i><span>Attached Bathroom</span></div>
+          <div class="offer-item"><i class="fa-solid fa-tv"></i><span>TV</span></div>
+          <div class="offer-item"><i class="fa-solid fa-bed"></i><span>Comfortable bedding</span></div>
+          <div class="offer-item"><i class="fa-solid fa-bell-concierge"></i><span>Room Service</span></div>
+        </div>
+      </div>
+
+      <% if (currUser && listing.owner && listing.owner._id.equals(currUser._id)) { %>
+        <div class="owner-controls">
+          <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn">Edit</a>
+          <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="display:inline;">
+            <button class="btn delete-btn">Delete</button>
+          </form>
+        </div>
+      <% } %>
+
+      <div class="reviews-section mt-4">
+        <% if (currUser) { %>
+          <h4>Leave a review</h4>
+          <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+              <label for="rating" class="form-label">Rating</label>
+              <fieldset class="starability-slot">
+                <% for (let i = 1; i <= 5; i++) { %>
+                  <input type="radio" id="first-rate<%= i %>" name="review[rating]" value="<%= i %>" <%= i === 1 ? 'checked' : '' %> />
+                  <label for="first-rate<%= i %>"><%= i %> star</label>
+                <% } %>
+              </fieldset>
+            </div>
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comments</label>
+              <textarea name="review[comment]" id="comment" rows="5" class="form-control" required></textarea>
+              <div class="invalid-feedback">Please add some comments</div>
+            </div>
+            <button class="btn btn-outline-dark">Submit</button>
+          </form>
+        <% } %>
+
+        <% if (listing.reviews && listing.reviews.length > 0) { %>
+          <hr>
+          <h4>All reviews</h4>
+          <div class="reviews-container row">
+            <% listing.reviews.forEach(review => { %>
+              <div class="col-md-4 col-sm-6 mb-3">
+                <div class="review-card card h-100">
+                  <div class="card-body">
+                    <h5>@<%= review.author.username %></h5>
+                    <p class="starability-result" data-rating="<%= review.rating %>"></p>
+                    <p><%= review.comment %></p>
+                  </div>
+                  <% if (currUser && review.author._id.equals(currUser._id)) { %>
+                    <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" class="p-2">
+                      <button class="btn btn-sm btn-dark">Delete</button>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+
+      <hr>
+
+      <h3>Where you'll be</h3>
+      <div id="map"></div>
+    </div> 
+<aside class="booking-sidebar">
+  <% if (listing.price) { %>
+    <div class="price-reserve-box">
+      <h4>
+        ₹<%= listing.price.toLocaleString("en-IN") %>
+        <span class="per">/ night</span>
+      </h4>
+
+      <form id="booking-form" 
+        action="/listings/<%= listing._id %>/addtocart" 
+        method="POST" 
+        class="needs-validation" 
+        novalidate>
+
+        <!-- Check-in -->
+        <div class="form-field">
+          <label for="checkin">Check-in</label>
+          <input type="date" id="checkin" name="checkin" placeholder="Add date" required>
+          <div class="invalid-feedback">Please select a check-in date</div>
+        </div>
+
+        <!-- Checkout -->
+        <div class="form-field mt-3">
+          <label for="checkout">Checkout</label>
+         <input type="date" id="checkout" name="checkout" placeholder="Add date" required>
+          <div class="invalid-feedback">Please select a checkout date</div>
+        </div>
+
+        <!-- Guests -->
+        <div class="form-field mt-3">
+          <label for="guests">Guests</label>
+          <select id="guests" name="guests" class="form-control" required>
+            <option value="" disabled selected>Who's coming?</option>
+            <option value="1">1 guest</option>
+            <option value="2">2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+            <option value="5">5 guests</option>
+          </select>
+          <div class="invalid-feedback">Please select number of guests</div>
+        </div>
+
+        <button type="submit" class="reserve-btn">Reserve</button>
+        <p class="no-charge-text">You won't be charged yet</p>
+      </form>
+    </div>
+  <% } %>
+</aside>
+<!-- Mobile sticky bar (visible only on phones) -->
+<div class="mobile-booking-bar">
+  <div class="price">
+    ₹<%= listing.price.toLocaleString("en-IN") %>
+    <span class="per">/ night</span>
+  </div>
+  <button class="reserve-btn" id="openBookingModal" type="button">Reserve</button>
+  </div>
+
+<!-- Mobile booking modal (updated) -->
+<div id="bookingModal" class="booking-modal">
+  <div class="modal-content">
+    <button class="close-modal" id="closeBookingModal" type="button">&times;</button>
+
+    <h3>Book your stay</h3>
+
+    <form id="mobile-booking-form"
+      action="/listings/<%= listing._id %>/addtocart"
+      method="POST"
+      class="needs-validation booking-form"
+      novalidate>
+
+      <!-- Check-in -->
+      <div class="form-field">
+        <label for="checkinMobile">Check-in</label>
+        <input type="date" id="checkinMobile" name="checkin" class="form-control" required>
+        <div class="invalid-feedback">Please select a check-in date</div>
+      </div>
+
+      <!-- Checkout -->
+      <div class="form-field">
+        <label for="checkoutMobile">Checkout</label>
+        <input type="date" id="checkoutMobile" name="checkout" class="form-control" required>
+        <div class="invalid-feedback">Please select a checkout date</div>
+      </div>
+
+      <!-- Guests -->
+      <div class="form-field">
+        <label for="guestsMobile">Guests</label>
+        <select id="guestsMobile" name="guests" class="form-control" required>
+          <option value="" disabled selected>Who's coming?</option>
+          <option value="1">1 guest</option>
+          <option value="2">2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5 guests</option>
+        </select>
+        <div class="invalid-feedback">Please select number of guests</div>
+      </div>
+
+      <button type="submit" class="reserve-btn">Reserve</button>
+    </form>
+  </div>
+</div>
+
+  </div>
+ </div>
+
+<script src="/js/map.js"></script>
+
+<script src="/js/showMore.js"></script>
+
+<script src="/js/ReserveScript.js"></script>
+         
+
+ 
+    
